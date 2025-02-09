@@ -7,4 +7,4 @@ test_list = [
     {'id': 615064591, 'state': 'CANCELED', 'date': '2018-10-14T08:21:33.419441'}
 ]
 
-print(sort_by_date(test_list, 'DESC22'))
+print(sort_by_date(test_list, False))
