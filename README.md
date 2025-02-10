@@ -8,5 +8,5 @@
 
 Необходимые зависимости
 ```
-$poetry python-dateutil
+poetry python-dateutil
 ```
