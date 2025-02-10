@@ -1,6 +1,3 @@
-from typing import List
-
-
 def get_mask_card_number(card_number: str) -> str:
     """принимает на вход номер карты и возвращает ее маску"""
     if len(card_number) != 16:

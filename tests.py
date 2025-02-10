@@ -8,3 +8,4 @@ test_list = [
 ]
 
 print(sort_by_date(test_list, False))
+print(filter_by_state(test_list, ''))
