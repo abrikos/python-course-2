@@ -4,17 +4,17 @@ from typing import List
 def cards_expected() -> List:
     return [
         ("1231 4567 8888 9999", "1231 45** **** 9999"),
-        ("RRRR", 'Error'),
-        ("RRR", 'Error'),
-        (99, 'Error'),
+        ("RRRR", "Error"),
+        ("RRR", "Error"),
+        (99, "Error"),
     ]
 
 
 def account_expected() -> List:
     return [
         ("1231456788889999", "**9999"),
-        ("xxx", 'Error'),
-        (99, 'Error'),
+        ("xxx", "Error"),
+        (99, "Error"),
     ]
 
 

@@ -1,5 +1,5 @@
 import pytest
-from test_data import account_expected, cards_expected
+from data_for_testing import account_expected, cards_expected
 
 from src.masks import get_mask_account, get_mask_card_number
 
