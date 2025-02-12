@@ -1,7 +1,7 @@
 from typing import List
 
 import pytest
-from test_data import cards_expected, account_expected
+from test_data import account_expected, cards_expected
 
 from src.widget import get_date, mask_account_card
 
@@ -16,6 +16,7 @@ def test_get_date(dates: List) -> None:
 def test_cards(card: str, expected: str) -> None:
     """Test card with data from 'test_data.py'"""
     assert mask_account_card(card) == expected
+
 
 
 @pytest.mark.parametrize("account, expected", account_expected())

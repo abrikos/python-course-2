@@ -3,6 +3,7 @@ from typing import List
 
 import pytest
 
+
 @pytest.fixture
 def dates() -> List:
     return [
