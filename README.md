@@ -7,6 +7,14 @@
 ## Инструкции по установке
 
 Необходимые зависимости
-```
-poetry python-dateutil
-```
+
+```poetry python-dateutil```
+
+```poetry python-utils```
+
+```poetry pytest```
+
+```poetry pytest-cov```
+
+## Тестирование
+```python -m pytest --cov=src --cov-report=html```
