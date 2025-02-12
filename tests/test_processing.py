@@ -1,6 +1,7 @@
 from typing import List
+
 import pytest
-from data_for_testing import lists_sort_by_date, lists_filer_by_state
+from data_for_testing import lists_filer_by_state, lists_sort_by_date
 
 from src.processing import filter_by_state, sort_by_date
 

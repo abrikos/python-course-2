@@ -33,14 +33,15 @@ def lists_sort_by_date() -> List:
         ),
     ]
 
-def lists_filer_by_state()->List:
+
+def lists_filer_by_state() -> List:
     return [
         (
             [
                 {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
                 {"id": 939719570, "state": "CANCELED", "date": "2018-06-30T02:08:58.425572"},
             ],
-            'CANCELED',
+            "CANCELED",
             [
                 {"id": 939719570, "state": "CANCELED", "date": "2018-06-30T02:08:58.425572"},
             ],
