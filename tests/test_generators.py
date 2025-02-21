@@ -16,6 +16,11 @@ def test_transactions_usd(transactions_fixture_usd: List) -> None:
     for fixture in transactions_fixture_usd:
         assert next(iterator) == fixture
 
+def test_transactions_undef(transactions_fixture_usd: List) -> None:
+    iterator = filter_by_currency(transactions)
+    for fixture in transactions_fixture_usd:
+        assert next(iterator) == fixture
+
 def test_transactions_rur(transactions_fixture_rur: List) -> None:
     iterator = filter_by_currency(transactions, "RUR")
     for fixture in transactions_fixture_rur:
