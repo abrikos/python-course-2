@@ -3,7 +3,7 @@ from typing import List
 import pytest
 from data_for_testing import transactions
 
-from src.generators import filter_by_currency
+from src.generators import filter_by_currency, transaction_descriptions
 
 
 # @pytest.mark.parametrize("data_list, currency, expected", data_transactions_by_currency())
@@ -24,4 +24,9 @@ def test_transactions_undef(transactions_fixture_usd: List) -> None:
 def test_transactions_rur(transactions_fixture_rur: List) -> None:
     iterator = filter_by_currency(transactions, "RUR")
     for fixture in transactions_fixture_rur:
+        assert next(iterator) == fixture
+
+def test_transactions_description(transactions_descriptions_fixture: List) -> None:
+    iterator = transaction_descriptions(transactions)
+    for fixture in transactions_descriptions_fixture:
         assert next(iterator) == fixture

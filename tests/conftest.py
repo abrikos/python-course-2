@@ -18,6 +18,15 @@ def dates() -> List:
 
 
 @pytest.fixture
+def transactions_descriptions_fixture() -> List:
+    return [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод со счета на счет",
+        "Перевод со счета на счет",
+
+    ]
+@pytest.fixture
 def transactions_fixture_usd() -> List:
     return [{
         "id": 1,
