@@ -45,3 +45,14 @@ iterator = filter_by_currency(transactions)
 for tx in transactions:
     print(next(iterator))
 ```
+
+### Генератор номеров карт
+```python
+def card_number_generator(start: int, end: int) -> List:
+```
+
+Пример использования:
+```python
+for card_number in card_number_generator(1, 5):
+    print(card_number)
+```
