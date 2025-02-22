@@ -18,3 +18,30 @@
 
 ## Тестирование
 ```python -m pytest --cov=src --cov-report=html```
+
+## Модуль generators
+
+### Фильтрация транзакций по валюте:
+
+```python 
+def filter_by_currency(transactions: List, currency="USD")->iter
+```
+Пример использования
+```python
+usd = transaction_descriptions(transactions)
+for tx in transactions:
+    print(next(usd))
+```
+
+### Вывод описания транзакций:
+
+```python 
+def transaction_descriptions(transactions: List) ->iter
+```
+
+Пример использования:
+```python
+iterator = filter_by_currency(transactions)
+for tx in transactions:
+    print(next(iterator))
+```
