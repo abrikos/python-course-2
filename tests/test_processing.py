@@ -1,9 +1,9 @@
 from typing import List
 
 import pytest
-from data_for_testing import lists_filer_by_state, lists_sort_by_date
 
 from src.processing import filter_by_state, sort_by_date
+from tests.data_for_testing import lists_filer_by_state, lists_sort_by_date
 
 
 @pytest.mark.parametrize("data_list, reverse, expected", lists_sort_by_date())
