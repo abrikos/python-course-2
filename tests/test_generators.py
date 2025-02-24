@@ -1,9 +1,9 @@
 from typing import List
 
 import pytest
-from data_for_testing import transactions
 
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+from tests.data_for_testing import transactions
 
 card_numbers_checklist = [
     (
