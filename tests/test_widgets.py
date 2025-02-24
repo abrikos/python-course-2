@@ -1,9 +1,9 @@
 from typing import List
 
 import pytest
-from data_for_testing import account_expected, cards_expected
 
 from src.widget import get_date, mask_account_card
+from tests.data_for_testing import account_expected, cards_expected
 
 
 def test_get_date(dates: List) -> None:

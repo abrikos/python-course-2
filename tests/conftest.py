@@ -14,3 +14,61 @@ def dates() -> List:
         ("20-00-12", "Wrong input date"),
         ("text", "Wrong input date"),
     ]
+
+
+@pytest.fixture
+def transactions_descriptions_fixture() -> List:
+    return [
+        "Перевод организации",
+        "Перевод со счета на счет",
+        "Перевод со счета на счет",
+        "Перевод со счета на счет",
+    ]
+
+
+@pytest.fixture
+def transactions_fixture_usd() -> List:
+    return [
+        {
+            "id": 1,
+            "state": "EXECUTED",
+            "date": "2018-06-30T02:08:58.425572",
+            "operationAmount": {"amount": "100", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод организации",
+            "from": "Счет 75106830613657916952",
+            "to": "Счет 11776614605963066702",
+        },
+        {
+            "id": 3,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "300", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+    ]
+
+
+@pytest.fixture
+def transactions_fixture_rur() -> List:
+    return [
+        {
+            "id": 2,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "200", "currency": {"name": "RUR", "code": "RUR"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+        {
+            "id": 4,
+            "state": "EXECUTED",
+            "date": "2019-04-04T23:20:05.206878",
+            "operationAmount": {"amount": "400", "currency": {"name": "RUR", "code": "RUR"}},
+            "description": "Перевод со счета на счет",
+            "from": "Счет 19708645243227258542",
+            "to": "Счет 75651667383060284188",
+        },
+    ]
