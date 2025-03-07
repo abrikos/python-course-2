@@ -17,7 +17,7 @@ def read_transactions(file: str) -> Any:
     """Чтение транзакций из файла"""
     try:
         return json.loads(read_file(file))
-    except json.JSONDecoder:
+    except json.JSONDecodeError:
         return []
 
 
@@ -27,3 +27,4 @@ def transaction_sum(tx: dict) -> float:
     if tx["operationAmount"]["currency"]["code"] in ("USD", "EUR"):
         course = get_course(tx["operationAmount"]["currency"]["code"])
     return float(tx["operationAmount"]["amount"]) * course
+
