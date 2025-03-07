@@ -19,6 +19,12 @@
 ## Тестирование
 ```python -m pytest --cov=src --cov-report=html```
 
+## Модуль decorators
+### Декоратор log 
+```python
+def log(filename=''):
+```
+
 ## Модуль generators
 
 ### Фильтрация транзакций по валюте:
