@@ -5,6 +5,7 @@ from src.external_api import get_course
 
 
 def read_file(file: str) -> str:
+    """Чтение фала"""
     try:
         with open(file) as f:
             return f.read()
@@ -13,7 +14,7 @@ def read_file(file: str) -> str:
 
 
 def read_transactions(file: str) -> Any:
-    """Чтение фала транзакций"""
+    """Чтение транзакций из файла"""
     try:
         return json.loads(read_file(file))
     except json.JSONDecoder:
