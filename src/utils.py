@@ -16,7 +16,11 @@ def read_file(file: str) -> str:
 def read_transactions(file: str) -> Any:
     """Чтение транзакций из файла"""
     try:
-        return json.loads(read_file(file))
+        res = json.loads(read_file(file))
+        if type(res) == 'list':
+            return res
+        else:
+            return []
     except json.JSONDecodeError:
         return []
 

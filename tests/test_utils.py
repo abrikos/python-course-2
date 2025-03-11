@@ -19,3 +19,15 @@ def test_tx_v2() -> None:
 def test_read_json() -> None:
     src.utils.read_file = Mock(return_value="[]")
     assert read_transactions("../some/file") == []
+
+def test_read_tx() -> None:
+    src.utils.read_file = Mock(return_value="")
+    assert read_transactions("../some/file") == []
+
+def test_read_tx2() -> None:
+    src.utils.read_file = Mock(return_value="zzzz")
+    assert read_transactions("../some/file") == []
+
+def test_read_tx3() -> None:
+    src.utils.read_file = Mock(return_value="{}")
+    assert read_transactions("../some/file") == []
