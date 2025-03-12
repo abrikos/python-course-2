@@ -25,6 +25,16 @@
 def log(filename=''):
 ```
 
+## Модуль чтения из CSV и Excel
+### Чтение из CSV файла
+```python
+res = read_csv('path_to_file')
+```
+### Чтение из Excel файла
+```python
+res = read_excel('path_to_file')
+```
+
 ## Модуль generators
 
 ### Фильтрация транзакций по валюте:
@@ -62,3 +72,4 @@ def card_number_generator(start: int, end: int) -> List:
 for card_number in card_number_generator(1, 5):
     print(card_number)
 ```
+
