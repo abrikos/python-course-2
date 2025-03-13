@@ -7,22 +7,12 @@ def read_csv(file: str) -> list:
     """Read txs from CSV"""
     try:
         with open(file) as f:
+            first_line = f.readline().split(';')
             reader = csv.DictReader(
                 f,
                 delimiter=";",
-                fieldnames=[
-                    "id",
-                    "state",
-                    "date",
-                    "amount",
-                    "currency_name",
-                    "currency_code",
-                    "from",
-                    "to",
-                    "description",
-                ],
+                fieldnames=first_line,
             )
-            next(reader)
             tx_list = []
             for row in reader:
                 tx_list.append(row)
@@ -42,5 +32,5 @@ def read_xls(file: str):
         return []
 
 
-# print(read_csv("../data/transactions.csv"))
+print(read_csv("../data/transactions.csv"))
 # print(read_xls("../data/transactions_excel.xlsx"))
