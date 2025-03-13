@@ -29,4 +29,4 @@ def read_xls(file: str):
 
 
 #print(read_csv("../data/transactions.csv"))
-print(read_xls("../data/transactions_excel.xlsx"))
+#print(read_xls("../data/transactions_excel.xlsx"))
