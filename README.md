@@ -19,6 +19,50 @@
 ## Тестирование
 ```python -m pytest --cov=src --cov-report=html```
 
+## Модуль utils
+
+```python
+def search_txs_by_desc(transactions: list, search: str) -> list:
+"""Search txs by desc"""
+```
+```python
+def count_txs_by_type(transactions: list, states: list) -> dict:
+    """Search txs by state"""
+```
+```python
+def read_file(file: str) -> str:
+    """Чтение фала"""
+```
+````python
+def transaction_sum(tx: dict) -> float:
+    """Конвертация суммы транзакции в рубли"""
+````
+```python
+def read_transactions_json(file: str) -> Any:
+    """Чтение транзакций из файла JSON"""
+```
+```python
+def read_transactions_csv(file: str) -> list:
+    """Read txs from CSV"""
+```
+```python
+def read_transactions_xls(file: str):
+    """Read txs from Excel"""
+```
+```python
+def read_transactions_by_ext(ext: str) -> list:
+    """Read transactions from files by extension"""
+```
+```python
+def search_txs_by_desc(transactions: list, search: str) -> list:
+    """Search txs by desc"""
+```
+```python
+def count_txs_by_type(transactions: list, states: list) -> dict:
+    """Search txs by state"""
+```
+
+
 ## Модуль decorators
 ### Декоратор log 
 ```python

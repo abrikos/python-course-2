@@ -1,5 +1,9 @@
+import csv
 import json
-from typing import Any
+import re
+from collections import Counter
+
+import pandas as pd
 
 from src.external_api import get_course
 from src.logger import get_logger
@@ -19,23 +23,6 @@ def read_file(file: str) -> str:
         return "[]"
 
 
-def read_transactions(file: str) -> Any:
-    """Чтение транзакций из файла"""
-    try:
-        res = json.loads(read_file(file))
-        if type(res) is list:
-            logger.debug("Read txs success")
-            if len(res) == 0:
-                logger.warning(f"Data length: {len(res)}")
-            return res
-        else:
-            logger.warning(f'"{file}" has no list data type ({type(res)})')
-            return []
-    except json.JSONDecodeError as e:
-        logger.error(e)
-        return []
-
-
 def transaction_sum(tx: dict) -> float:
     """Конвертация суммы транзакции в рубли"""
     course = 1.0
@@ -45,6 +32,68 @@ def transaction_sum(tx: dict) -> float:
     return float(tx["operationAmount"]["amount"]) * course
 
 
-# read_transactions("../data/operations2.json")
-# with open(log_file) as f:
-#    print(f.read())
+def read_transactions_json(file: str) -> list:
+    """Чтение транзакций из файла JSON"""
+    try:
+        res = json.loads(read_file(file))
+        if type(res) is list:
+            logger.debug("Read txs success")
+            if len(res) == 0:
+                logger.warning(f"Data length: {len(res)}")
+            return list(filter(lambda x: all(key in x for key in res[0]), res))
+        else:
+            logger.warning(f'"{file}" has no list data type ({type(res)})')
+            return []
+    except json.JSONDecodeError as e:
+        logger.error(e)
+        return []
+
+
+def read_transactions_csv(file: str) -> list:
+    """Read txs from CSV"""
+    try:
+        with open(file) as f:
+            first_line = f.readline().strip().split(";")
+            reader = csv.DictReader(f, delimiter=";", fieldnames=first_line, lineterminator="\n")
+            tx_list = []
+            for row in reader:
+                tx_list.append(row)
+            return list(filter(lambda x: all(key in x for key in first_line), tx_list))
+    except (FileNotFoundError, ValueError) as e:
+        print(e)
+        return []
+
+
+def read_transactions_xls(file: str) -> list:
+    """Read txs from Excel"""
+    try:
+        df = pd.read_excel(file)
+        keys = df.to_dict("records")[0].keys()
+        return list(filter(lambda x: all(key in x for key in keys) and x["id"] > 0, df.to_dict("records")))
+    except (FileNotFoundError, ValueError) as e:
+        print(e)
+        return []
+
+
+def read_transactions_by_ext(ext: str) -> list:
+    """Read transactions from files by extension"""
+    file = "../data/transactions." + ext
+    match ext:
+        case "csv":
+            return read_transactions_csv(file)
+        case "json":
+            return read_transactions_json(file)
+        case "xlsx":
+            return read_transactions_xls(file)
+        case _:
+            return []
+
+
+def search_txs_by_desc(transactions: list, search: str) -> list:
+    """Search txs by desc"""
+    return list(filter(lambda x: re.search(str(search), x["description"] if x["description"] else '', flags=re.IGNORECASE), transactions))
+
+
+def count_txs_by_type(transactions: list, states: list) -> dict:
+    """Search txs by state"""
+    return dict(Counter(map(lambda d: d["state"], filter(lambda d: d["state"] in states, transactions))))

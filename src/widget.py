@@ -14,7 +14,7 @@ def mask_account_card(info: str) -> str | bool:
         return get_mask_account(card_info[-1])
 
 
-def get_date(date: str) -> str:
+def format_date(date: str) -> str:
     """Форматирует дату"""
     try:
         return parse(date).strftime("%d.%m.%Y")
