@@ -1,10 +1,25 @@
 from typing import Any
-from unittest.mock import Mock, patch, mock_open
+from unittest.mock import Mock, mock_open, patch
 
 import pandas
 
 from src import utils
 
+
+def test_tx_search_by_description() -> None:
+    txs = [{"description": "zzzz"}]
+    assert utils.search_txs_by_desc(txs, "aaa") == []
+    assert utils.search_txs_by_desc(txs, "z") == txs
+
+
+def test_tx_counter_by_state() -> None:
+    txs = [
+        {"state": "a"},
+        {"state": "b"},
+        {"state": "b"},
+    ]
+    assert utils.count_txs_by_type(txs, ["a"]) == {"a": 1}
+    assert utils.count_txs_by_type(txs, ["a", "b"]) == {"a": 1, "b": 2}
 
 
 @patch("src.utils.get_course")
@@ -65,7 +80,7 @@ def test_csv() -> None:
                 "id": "20",
                 "state": "21",
                 "to": "27",
-            }
+            },
         ]
 
 
