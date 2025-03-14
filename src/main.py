@@ -14,7 +14,7 @@ def check_user_input(values: list, def_value: int | str, number_input: bool = Tr
     while True:
         try:
             value = def_value if DEBUG else int(input()) if number_input else input()
-            if value in valid_choices:
+            if value.upper() if not number_input else value in map(lambda x:x.upper if not number_input else x ,valid_choices):
                 return value
             else:
                 print(error_message)
@@ -91,7 +91,7 @@ def main() -> None:
     if filter_by_desc == "y":
         word = choose_word_for_filtration("Откр")
         txs = utils.search_txs_by_desc(txs, word)
-    rub = choose_rub_txs("y")
+    rub = choose_rub_txs("Y")
 
     txs_filtered = sorted(
         filter(
