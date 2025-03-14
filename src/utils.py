@@ -40,7 +40,7 @@ def read_transactions_json(file: str) -> Any:
             logger.debug("Read txs success")
             if len(res) == 0:
                 logger.warning(f"Data length: {len(res)}")
-            return res
+            return list(filter(lambda x: all(key in x for key in res[0]), res))
         else:
             logger.warning(f'"{file}" has no list data type ({type(res)})')
             return []
@@ -63,7 +63,7 @@ def read_transactions_csv(file: str) -> list:
             tx_list = []
             for row in reader:
                 tx_list.append(row)
-            return tx_list
+            return list(filter(lambda x: all(key in x for key in first_line), tx_list))
     except (FileNotFoundError, ValueError) as e:
         print(e)
         return []
@@ -73,13 +73,15 @@ def read_transactions_xls(file: str):
     """Read txs from Excel"""
     try:
         df = pd.read_excel(file)
-        return list(filter(lambda x: x['id'] > 0, df.to_dict("records")))
+        keys = df.to_dict("records")[0].keys()
+        return list(filter(lambda x: all(key in x for key in keys), df.to_dict("records")))
     except (FileNotFoundError, ValueError) as e:
         print(e)
         return []
 
 
 def read_transactions_by_ext(ext: str) -> list:
+    """Read transactions from files by extension"""
     file = '../data/transactions.' + ext
     match ext:
         case 'csv':
