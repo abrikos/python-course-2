@@ -21,9 +21,12 @@ def get_course(symbols: str = "USD") -> Any:
 def get_stock_prices(stocks: list) -> Any:
     """Получение текущего курсов S&P500"""
     try:
-        url = f"https://https://twelvedata.com/exchangerates_data/latest?symbols={','.join(stocks)}"
-        headers = {"apikey": os.getenv("API_twelve")}
+
+        url = f"https://api.twelvedata.com/price?symbol={','.join(stocks)}&apikey={os.getenv('API_twelve')}"
+        headers = {"Authorization": os.getenv("API_twelve")}
         response = requests.get(url, headers=headers)
         return response.json()
-    except Exception:
+    except Exception as e:
         return {}
+
+#print(get_stock_prices(["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"]))

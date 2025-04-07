@@ -33,17 +33,17 @@ def page_home(date: str, txs: pd.DataFrame, settings: dict) -> str:
 
     txs_filtered.sort(key=lambda x: x["Сумма операции"], reverse=True)
 
-    # print(pretty_object(settings))
+
     courses = get_course(",".join(settings["user_currencies"]))
-    # print(pretty_object(courses))
+
     currency_rates = []
     for course in courses["rates"]:
         currency_rates.append({"currency": course, "rate": 1 / courses["rates"][course]})
-    # print(pretty_object(currency_rates))
+
     stocks = get_stock_prices(settings["user_stocks"])
     stock_prices = []
     for stock in stocks:
-        stock_prices.append({"stock": stock, "price": stocks[stock]})
+        stock_prices.append({"stock": stock, "price": float(stocks[stock]['price'])})
     response = {
         "greeting": greeting,
         "cards": cards,
