@@ -24,6 +24,9 @@ def page_home(date: str, txs: pd.DataFrame, settings: dict) -> str:
     dt = datetime.strptime(date, "%Y-%m-%d %H:%M:%S")
     start_of_month = dt.replace(day=1)
     txs_filtered = search_txs_by_date(txs, start_of_month, dt)
+    for tx in txs_filtered:
+        tx['Сумма операции'] = abs(tx['Сумма операции'])
+        tx['Сумма платежа'] = abs(tx['Сумма платежа'])
     cards = [
         {"last_digits": key, "total_spent": sum(int(item["Сумма операции"]) for item in group)}
         for key, group in groupby(txs_filtered, key=lambda x: x["Номер карты"])
@@ -34,16 +37,18 @@ def page_home(date: str, txs: pd.DataFrame, settings: dict) -> str:
     txs_filtered.sort(key=lambda x: x["Сумма операции"], reverse=True)
 
 
-    courses = get_course(",".join(settings["user_currencies"]))
 
-    currency_rates = []
-    for course in courses["rates"]:
-        currency_rates.append({"currency": course, "rate": 1 / courses["rates"][course]})
-
-    stocks = get_stock_prices(settings["user_stocks"])
     stock_prices = []
-    for stock in stocks:
-        stock_prices.append({"stock": stock, "price": float(stocks[stock]['price'])})
+    currency_rates = []
+    if False:
+        courses = get_course(",".join(settings["user_currencies"]))
+        for course in courses["rates"]:
+            currency_rates.append({"currency": course, "rate": 1 / courses["rates"][course]})
+
+        stocks = get_stock_prices(settings["user_stocks"])
+
+        for stock in stocks:
+            stock_prices.append({"stock": stock, "price": float(stocks[stock]['price'])})
     response = {
         "greeting": greeting,
         "cards": cards,
