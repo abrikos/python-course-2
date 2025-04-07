@@ -40,15 +40,14 @@ def page_home(date: str, txs: pd.DataFrame, settings: dict) -> str:
 
     stock_prices = []
     currency_rates = []
-    if False:
-        courses = get_course(",".join(settings["user_currencies"]))
-        for course in courses["rates"]:
-            currency_rates.append({"currency": course, "rate": 1 / courses["rates"][course]})
+    courses = get_course(",".join(settings["user_currencies"]))
+    for course in courses["rates"]:
+        currency_rates.append({"currency": course, "rate": 1 / courses["rates"][course]})
 
-        stocks = get_stock_prices(settings["user_stocks"])
+    stocks = get_stock_prices(settings["user_stocks"])
 
-        for stock in stocks:
-            stock_prices.append({"stock": stock, "price": float(stocks[stock]['price'])})
+    for stock in stocks:
+        stock_prices.append({"stock": stock, "price": float(stocks[stock]['price'])})
     response = {
         "greeting": greeting,
         "cards": cards,
