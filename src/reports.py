@@ -8,6 +8,8 @@ from src.utils import add_months
 
 
 def report_to_file(filename: str = "report.json") -> Callable:
+    """Декоратор записи отчётов в файл"""
+
     def decorator(function: Callable) -> Callable:
         def wrapper(*args: tuple, **kwargs: tuple) -> Any:
             try:
@@ -28,8 +30,9 @@ fname = "report.log"
 
 @report_to_file(fname)
 def spends_by_category(txs: pd.DataFrame, category: str, date: datetime = datetime.now()) -> Any:
+    """Траты по категориям"""
     txs_filtered = src.utils.search_txs_by_date(txs, date, add_months(date, 3))
-    return sum([x["Сумма операции"] for x in txs_filtered])
+    return {category:sum([x["Сумма операции"] for x in txs_filtered])}
 
 
 spends_by_category(src.utils.get_txs(), "Переводы", datetime(2021, month=12, day=30))

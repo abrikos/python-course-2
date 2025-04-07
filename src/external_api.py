@@ -26,7 +26,8 @@ def get_stock_prices(stocks: list) -> Any:
         headers = {"Authorization": os.getenv("API_twelve")}
         response = requests.get(url, headers=headers)
         return response.json()
-    except Exception as e:
+    except Exception:
         return {}
 
-#print(get_stock_prices(["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"]))
+
+# print(get_stock_prices(["AAPL", "AMZN", "GOOGL", "MSFT", "TSLA"]))

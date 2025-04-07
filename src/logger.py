@@ -10,7 +10,7 @@ class CustomFormatter(logging.Formatter):
     def __init__(self) -> None:
         super().__init__(fmt="%(filename)s", datefmt="%Y-%m-%d %I:%M:%S", style="%")
 
-    def format(self, record) -> Any:
+    def format(self, record: Any) -> Any:
         format_orig = self._style._fmt
         if record.levelno <= logging.DEBUG:
             self._style._fmt = CustomFormatter.debug_fmt
