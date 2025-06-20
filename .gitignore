@@ -1,5 +1,4 @@
 .idea
 .venv
-pyproject.toml
 poetry.lock
 .env
